@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Music Recommendation System</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+
+        <h1>🎵 Music Recommendation System</h1>
+
+        <p>
+            Discover songs similar to your favorites
+        </p>
+
+    </header>
+
+
+    <section class="search-section">
+
+    <form method="POST">
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                name="song_name"
+                placeholder="🔍 Search your favourite song..."
+                required>
+
+        </div>
+
+        <button type="submit">
+            🎵 Recommend Songs
+        </button>
+
+    </form>
+
+</section>
+
+        </form>
+
+    </section>
+
+
+    <section class="results">
+        {% if message %}
+
+        <p class="error-message">
+            {{ message }}
+        </p>
+
+        {% endif %}
+
+        <h2>Recommended Songs</h2>
+
+        {% if recommendations %}
+
+            {% for song in recommendations %}
+
+           <div class="song-card">
+
+                <h3>🎵 {{ song.track_name }}</h3>
+
+                <p><strong>👤 Artist:</strong> {{ song.artist }}</p>
+
+                <p><strong>📅 Released:</strong> {{ song.year }}</p>
+
+                <p><strong>🔥 Streams:</strong> {{ "{:,}".format(song.streams|int) }}</p>
+
+            </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <p>No recommendations yet.</p>
+
+        {% endif %}
+
+    </section>
+
+</div>
+
+</body>
+
+</html>

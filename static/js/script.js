@@ -3,41 +3,49 @@ console.log("Music Recommendation System Loaded Successfully!");
 const input = document.getElementById("song_name");
 const suggestionsBox = document.getElementById("suggestions");
 
-input.addEventListener("input", async () => {
+input.addEventListener("input", async function () {
 
     const query = input.value.trim();
 
-    if(query.length === 0){
-
+    if (query.length === 0) {
         suggestionsBox.innerHTML = "";
-
         return;
     }
 
-    const response = await fetch(`/search?query=${query}`);
+    try {
 
-    const songs = await response.json();
+        const response = await fetch(`/search?query=${encodeURIComponent(query)}`);
 
-    suggestionsBox.innerHTML = "";
+        const songs = await response.json();
 
-    songs.forEach(song => {
+        suggestionsBox.innerHTML = "";
 
-        const div = document.createElement("div");
+        songs.forEach(song => {
 
-        div.classList.add("suggestion-item");
+            const div = document.createElement("div");
 
-        div.innerText = song;
+            div.className = "suggestion-item";
 
-        div.onclick = () => {
+            div.textContent = song;
 
-            input.value = song;
+            div.onclick = function () {
 
-            suggestionsBox.innerHTML = "";
+                input.value = song;
 
-        };
+                suggestionsBox.innerHTML = "";
 
-        suggestionsBox.appendChild(div);
+            };
 
-    });
+            suggestionsBox.appendChild(div);
+
+        });
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+    }
 
 });

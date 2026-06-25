@@ -50,9 +50,13 @@ header{
 
 header h1{
 
-    font-size:42px;
+    font-size:48px;
 
-    margin-bottom:10px;
+    margin-bottom:15px;
+
+    color:#1DB954;
+
+    text-shadow:0 0 20px rgba(29,185,84,.25);
 
 }
 
@@ -194,17 +198,19 @@ header p{
 
 .song-card{
 
-    background:#1e1e1e;
+    background:linear-gradient(145deg,#1f1f1f,#292929);
+
+    border:1px solid rgba(255,255,255,.08);
 
     border-left:5px solid #1DB954;
 
-    padding:20px;
+    padding:22px;
 
-    border-radius:15px;
+    border-radius:18px;
 
     margin-bottom:20px;
 
-    transition:0.3s;
+    transition:.3s;
 
     animation:fadeIn .5s ease;
 
@@ -212,9 +218,9 @@ header p{
 
 .song-card:hover{
 
-    transform:translateY(-5px);
+    transform:translateY(-8px);
 
-    box-shadow:0 12px 25px rgba(0,0,0,.35);
+    box-shadow:0 15px 30px rgba(0,0,0,.4);
 
 }
 
@@ -222,21 +228,21 @@ header p{
 
     color:#1DB954;
 
-    margin-bottom:10px;
+    margin-bottom:12px;
 
-    font-size:22px;
+    font-size:24px;
 
 }
 
 .song-card p{
 
-    margin-top:8px;
+    margin-top:10px;
 
     color:#d9d9d9;
 
     font-size:15px;
 
-    line-height:1.6;
+    line-height:1.7;
 
 }
 
@@ -361,5 +367,17 @@ header p{
 .suggestion-item:hover{
 
     background:#1DB954;
+
+}
+
+footer{
+
+    margin-top:60px;
+
+    text-align:center;
+
+    color:#888;
+
+    font-size:14px;
 
 }

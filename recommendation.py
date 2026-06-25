@@ -5,7 +5,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 # Load Dataset
 # ==========================================
 
-df = pd.read_csv("clean_spotify.csv")
+df = pd.read_csv("data/clean_spotify.csv")
 
 # ==========================================
 # Features Used for Recommendation

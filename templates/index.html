@@ -34,9 +34,13 @@
 
             <input
                 type="text"
+                id="song_name"
                 name="song_name"
                 placeholder="🔍 Search your favourite song..."
+                autocomplete="off"
                 required>
+
+            <div id="suggestions"></div>
 
         </div>
 
@@ -91,7 +95,7 @@
     </section>
 
 </div>
-
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 
 </html>

@@ -1,5 +1,5 @@
-from flask import Flask, render_template, request
-from recommendation import recommend_song
+from flask import Flask, render_template, request, jsonify
+from recommendation import recommend_song, get_song_suggestions
 
 app = Flask(__name__)
 
@@ -30,6 +30,15 @@ def home():
         recommendations=recommendations,
         message=message
     )
+
+@app.route("/search")
+def search():
+
+    query = request.args.get("query", "")
+
+    suggestions = get_song_suggestions(query)
+
+    return jsonify(suggestions)
 
 
 if __name__ == "__main__":

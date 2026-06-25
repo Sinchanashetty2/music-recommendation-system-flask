@@ -1,10 +1,16 @@
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 
-# Load cleaned dataset
+# ==========================================
+# Load Dataset
+# ==========================================
+
 df = pd.read_csv("clean_spotify.csv")
 
-# Features used for recommendation
+# ==========================================
+# Features Used for Recommendation
+# ==========================================
+
 FEATURES = [
     "danceability_%",
     "energy_%",
@@ -15,36 +21,38 @@ FEATURES = [
     "speechiness_%"
 ]
 
-# Create similarity matrix
+# ==========================================
+# Create Similarity Matrix
+# ==========================================
+
 feature_matrix = df[FEATURES]
 similarity_matrix = cosine_similarity(feature_matrix)
 
+
+# ==========================================
+# Recommend Songs
+# ==========================================
 
 def recommend_song(song_name, num_recommendations=5):
     """
     Returns a list of recommended songs.
     """
 
-    # Remove extra spaces and convert to lowercase
     song_name = song_name.strip().lower()
 
-    # Convert all song names to lowercase
     track_names = df["track_name"].str.lower()
 
-    # Find songs containing the entered text
-    matching_songs = track_names[track_names.str.contains(song_name, na=False)]
+    matching_songs = track_names[
+        track_names.str.contains(song_name, na=False)
+    ]
 
-    # No matching songs
     if matching_songs.empty:
         return []
 
-    # Select the first matching song
     song_index = matching_songs.index[0]
 
-    # Calculate similarity scores
     similarity_scores = list(enumerate(similarity_matrix[song_index]))
 
-    # Sort songs by similarity
     similarity_scores = sorted(
         similarity_scores,
         key=lambda x: x[1],
@@ -69,3 +77,26 @@ def recommend_song(song_name, num_recommendations=5):
             break
 
     return recommendations
+
+
+# ==========================================
+# Get Song Suggestions (Autocomplete)
+# ==========================================
+
+def get_song_suggestions(query, limit=5):
+    """
+    Returns a list of song names matching the search text.
+    """
+
+    query = query.strip().lower()
+
+    if query == "":
+        return []
+
+    matches = df["track_name"][
+        df["track_name"].str.lower().str.contains(query, na=False)
+    ]
+
+    suggestions = matches.drop_duplicates().head(limit).tolist()
+
+    return suggestions

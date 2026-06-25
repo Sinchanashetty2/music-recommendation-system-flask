@@ -319,3 +319,47 @@ header p{
     }
 
 }
+
+/* ==========================================
+   Search Suggestions
+========================================== */
+
+.search-box{
+
+    position:relative;
+
+}
+
+#suggestions{
+
+    position:absolute;
+
+    width:100%;
+
+    background:#282828;
+
+    border-radius:12px;
+
+    margin-top:8px;
+
+    overflow:hidden;
+
+    z-index:1000;
+
+}
+
+.suggestion-item{
+
+    padding:15px 20px;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.suggestion-item:hover{
+
+    background:#1DB954;
+
+}

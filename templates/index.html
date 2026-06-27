@@ -2,109 +2,199 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Music Recommendation System</title>
+    <title>EchoTune | Music Recommendation</title>
+
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
 
 <div class="container">
 
-    <header>
+    <!-- ================= Hero ================= -->
 
-        <h1>🎵 Music Recommendation System</h1>
+    <header class="hero">
+
+        <h1>🎵 EchoTune</h1>
 
         <p>
-            Discover songs similar to your favorites
+
+            Music Recommendation system that suggests
+            similar songs using Machine Learning and Cosine Similarity.
+
         </p>
 
     </header>
 
+    <!-- ================= Search ================= -->
 
     <section class="search-section">
 
-    <form method="POST">
+        <h2>
 
-        <div class="search-box">
+            Discover Your Next Favorite Song
 
-            <input
-                type="text"
-                id="song_name"
-                name="song_name"
-                placeholder="🔍 Search your favourite song..."
-                autocomplete="off"
-                required>
+        </h2>
+
+        <form method="POST">
+
+            <div class="search-box">
+
+                <input
+                        type="text"
+                        id="song_name"
+                        name="song_name"
+                        placeholder="Search your favourite song..."
+                        autocomplete="off"
+                        required>
+
+                <button type="submit">
+
+                    Recommend
+
+                </button>
+
+            </div>
 
             <div id="suggestions"></div>
-
-        </div>
-
-        <button type="submit">
-            🎵 Recommend Songs
-        </button>
-
-    </form>
-
-</section>
 
         </form>
 
     </section>
 
+    <!-- ================= Error ================= -->
+
+    {% if message %}
+
+    <div class="error-box">
+
+        {{ message }}
+
+    </div>
+
+    {% endif %}
+
+    <!-- ================= Results ================= -->
 
     <section class="results">
-        {% if message %}
 
-        <p class="error-message">
-            {{ message }}
-        </p>
+        <h2>
 
-        {% endif %}
+            Recommended Songs
 
-        <h2>Recommended Songs</h2>
+        </h2>
 
         {% if recommendations %}
 
+        <div class="song-grid">
+
             {% for song in recommendations %}
 
-           <div class="song-card">
+            <div class="song-card">
 
-                <h3>🎵 {{ song.track_name }}</h3>
+                <div class="card-header">
 
-                <p><strong>👤 Artist:</strong> {{ song.artist }}</p>
+                    <span class="match-badge">
 
-                <p><strong>📅 Released:</strong> {{ song.year }}</p>
+                        {{ song.similarity }}%
 
-                <p><strong>🔥 Streams:</strong> {{ "{:,}".format(song.streams|int) }}</p>
+                    </span>
+
+                </div>
+
+                <h3>
+
+                    {{ song.track_name }}
+
+                </h3>
+
+                <p>
+
+                    <strong>Artist</strong><br>
+
+                    {{ song.artist }}
+
+                </p>
+
+                <p>
+
+                    <strong>Released</strong><br>
+
+                    {{ song.year }}
+
+                </p>
+
+                <p>
+
+                    <strong>Streams</strong><br>
+
+                    {{ "{:,}".format(song.streams|int) }}
+
+                </p>
 
             </div>
 
             {% endfor %}
 
+        </div>
+
         {% else %}
 
-            <p>No recommendations yet.</p>
+        <div class="empty-state">
+
+            <h3>
+
+                Search for a song to receive recommendations.
+
+            </h3>
+
+        </div>
 
         {% endif %}
 
     </section>
 
 </div>
+
 <footer>
 
     <p>
-        Made with ❤️ using Flask & Machine Learning
+
+        Made with ❤️ using Flask, Python and Machine Learning
+
     </p>
 
 </footer>
 
+<div id="loadingOverlay">
+
+    <div class="loader-box">
+
+        <div class="spinner"></div>
+
+        <h2>Finding Similar Songs...</h2>
+
+        <p>
+
+            Analyzing song features...
+
+        </p>
+
+    </div>
+
+</div>
+
 <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
 </body>
 
 </html>

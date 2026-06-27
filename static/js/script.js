@@ -1,51 +1,98 @@
-console.log("Music Recommendation System Loaded Successfully!");
+// ==========================================
+// EchoTune
+// Autocomplete + Loading Animation
+// ==========================================
 
-const input = document.getElementById("song_name");
-const suggestionsBox = document.getElementById("suggestions");
+document.addEventListener("DOMContentLoaded", () => {
 
-input.addEventListener("input", async function () {
+    const input = document.getElementById("song_name");
+    const suggestionsBox = document.getElementById("suggestions");
+    const form = document.querySelector("form");
+    const overlay = document.getElementById("loadingOverlay");
+    const submitBtn = form.querySelector("button");
 
-    const query = input.value.trim();
+    // ==========================
+    // Autocomplete Search
+    // ==========================
 
-    if (query.length === 0) {
-        suggestionsBox.innerHTML = "";
-        return;
-    }
+    input.addEventListener("input", async () => {
 
-    try {
+        const query = input.value.trim();
 
-        const response = await fetch(`/search?query=${encodeURIComponent(query)}`);
+        if (!query) {
 
-        const songs = await response.json();
+            suggestionsBox.innerHTML = "";
 
-        suggestionsBox.innerHTML = "";
+            return;
 
-        songs.forEach(song => {
+        }
 
-            const div = document.createElement("div");
+        try {
 
-            div.className = "suggestion-item";
+            const response = await fetch(
+                `/search?query=${encodeURIComponent(query)}`
+            );
 
-            div.textContent = song;
+            const songs = await response.json();
 
-            div.onclick = function () {
+            suggestionsBox.innerHTML = "";
 
-                input.value = song;
+            songs.forEach(song => {
 
-                suggestionsBox.innerHTML = "";
+                const item = document.createElement("div");
 
-            };
+                item.className = "suggestion-item";
 
-            suggestionsBox.appendChild(div);
+                item.textContent = song;
 
-        });
+                item.addEventListener("click", () => {
 
-    }
+                    input.value = song;
 
-    catch (error) {
+                    suggestionsBox.innerHTML = "";
 
-        console.error(error);
+                });
 
-    }
+                suggestionsBox.appendChild(item);
+
+            });
+
+        }
+
+        catch (error) {
+
+            console.error("Autocomplete Error:", error);
+
+        }
+
+    });
+
+    // ==========================
+    // Close Suggestions
+    // ==========================
+
+    document.addEventListener("click", (event) => {
+
+        if (!event.target.closest(".search-section")) {
+
+            suggestionsBox.innerHTML = "";
+
+        }
+
+    });
+
+    // ==========================
+    // Loading Animation
+    // ==========================
+
+    form.addEventListener("submit", () => {
+
+        overlay.style.display = "flex";
+
+        submitBtn.disabled = true;
+
+        submitBtn.textContent = "Finding Songs...";
+
+    });
 
 });

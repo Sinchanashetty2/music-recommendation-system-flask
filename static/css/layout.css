@@ -1,0 +1,164 @@
+/* ==========================================
+   Layout
+   EchoTune v1.2
+========================================== */
+
+/* ===========================
+   Main Container
+=========================== */
+
+.container{
+
+    width:min(1100px,90%);
+
+    margin:0 auto;
+
+    padding:40px 0;
+
+}
+
+/* ===========================
+   Hero Section
+=========================== */
+
+.hero{
+
+    text-align:center;
+
+    margin-bottom:60px;
+
+    animation:fadeUp .6s ease;
+
+}
+
+.hero h1{
+
+    color:var(--primary);
+
+    margin-bottom:15px;
+
+}
+
+.hero p{
+
+    max-width:700px;
+
+    margin:0 auto;
+
+    font-size:1.05rem;
+
+    line-height:1.8;
+
+}
+
+/* ===========================
+   Search Section
+=========================== */
+
+.search-section{
+
+    margin-bottom:60px;
+
+    text-align:center;
+
+}
+
+.search-section h2{
+
+    margin-bottom:25px;
+
+}
+
+/* ===========================
+   Results Section
+=========================== */
+
+.results{
+
+    margin-bottom:60px;
+
+}
+
+.results h2{
+
+    text-align:center;
+
+    margin-bottom:35px;
+
+}
+
+/* ===========================
+   Song Grid
+=========================== */
+
+.song-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+    gap:25px;
+
+}
+
+/* ===========================
+   Empty State
+=========================== */
+
+.empty-state{
+
+    padding:60px 20px;
+
+    text-align:center;
+
+}
+
+.empty-state h3{
+
+    color:var(--text-secondary);
+
+    font-weight:500;
+
+}
+
+/* ===========================
+   Footer
+=========================== */
+
+footer{
+
+    border-top:1px solid var(--border);
+
+    padding:25px;
+
+    text-align:center;
+
+    margin-top:40px;
+
+}
+
+footer p{
+
+    font-size:.95rem;
+
+}
+
+/* ===========================
+   Common Section Card
+=========================== */
+
+.section-card{
+
+    background:var(--glass);
+
+    backdrop-filter:var(--glass-blur);
+
+    border:1px solid var(--border);
+
+    border-radius:var(--radius-lg);
+
+    padding:35px;
+
+    box-shadow:var(--shadow);
+
+}

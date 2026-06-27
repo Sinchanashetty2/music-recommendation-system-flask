@@ -4,43 +4,54 @@ from recommendation import recommend_song, get_song_suggestions
 app = Flask(__name__)
 
 
+# ==========================================
+# Home Page
+# ==========================================
 @app.route("/", methods=["GET", "POST"])
 def home():
+    """
+    Displays the home page and handles song recommendations.
+    """
 
-    # Variables available for both GET and POST requests
     recommendations = []
     message = ""
 
-    # Handle form submission
     if request.method == "POST":
 
-        # Get the song entered by the user
-        song_name = request.form["song_name"]
+        song_name = request.form.get("song_name", "").strip()
 
-        # Get recommendations
-        recommendations = recommend_song(song_name)
+        if song_name:
 
-        # If no recommendations are found
-        if not recommendations:
-            message = "❌ No matching song found. Please try another song."
+            recommendations = recommend_song(song_name)
 
-    # Always return the page
+            if not recommendations:
+                message = "❌ No matching song found. Please try another song."
+
     return render_template(
         "index.html",
         recommendations=recommendations,
         message=message
     )
 
+
+# ==========================================
+# Autocomplete Search
+# ==========================================
 @app.route("/search")
 def search():
+    """
+    Returns song suggestions for autocomplete.
+    """
 
-    query = request.args.get("query", "")
+    query = request.args.get("query", "").strip()
 
     suggestions = get_song_suggestions(query)
 
     return jsonify(suggestions)
 
 
+# ==========================================
+# Run Application
+# ==========================================
 if __name__ == "__main__":
     app.run(debug=True)
-    

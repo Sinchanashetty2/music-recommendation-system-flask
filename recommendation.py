@@ -21,40 +21,44 @@ FEATURES = [
     "speechiness_%"
 ]
 
+DEFAULT_RECOMMENDATIONS = 5
+
 # ==========================================
-# Create Similarity Matrix
+# Prepare Data
 # ==========================================
 
 feature_matrix = df[FEATURES]
+
 similarity_matrix = cosine_similarity(feature_matrix)
 
+# Store lowercase song names once for faster searching
+track_names = df["track_name"].str.lower()
 
 # ==========================================
 # Recommend Songs
 # ==========================================
 
-def recommend_song(song_name, num_recommendations=5):
+def recommend_song(song_name, num_recommendations=DEFAULT_RECOMMENDATIONS):
     """
-    Returns a list of recommended songs.
+    Returns a list of songs similar to the given song.
     """
 
     song_name = song_name.strip().lower()
 
-    track_names = df["track_name"].str.lower()
-
-    matching_songs = track_names[
+    matching_tracks = track_names[
         track_names.str.contains(song_name, na=False)
     ]
 
-    if matching_songs.empty:
+    if matching_tracks.empty:
         return []
 
-    song_index = matching_songs.index[0]
+    selected_song_index = matching_tracks.index[0]
 
-    similarity_scores = list(enumerate(similarity_matrix[song_index]))
+    similarity_scores = list(
+        enumerate(similarity_matrix[selected_song_index])
+    )
 
-    similarity_scores = sorted(
-        similarity_scores,
+    similarity_scores.sort(
         key=lambda x: x[1],
         reverse=True
     )
@@ -63,40 +67,48 @@ def recommend_song(song_name, num_recommendations=5):
 
     for index, score in similarity_scores:
 
-        if index == song_index:
+        # Skip the selected song itself
+        if index == selected_song_index:
             continue
 
+        song = df.iloc[index]
+
         recommendations.append({
-            "track_name": df.iloc[index]["track_name"],
-            "artist": df.iloc[index]["artist(s)_name"],
-            "year": df.iloc[index]["released_year"],
-            "streams": df.iloc[index]["streams"]
+
+            "track_name": song["track_name"],
+
+            "artist": song["artist(s)_name"],
+
+            "year": song["released_year"],
+
+            "streams": song["streams"],
+
+            "similarity": round(score * 100, 1)
+
         })
 
-        if len(recommendations) == num_recommendations:
+        if len(recommendations) >= num_recommendations:
             break
 
     return recommendations
 
 
 # ==========================================
-# Get Song Suggestions (Autocomplete)
+# Autocomplete Suggestions
 # ==========================================
 
 def get_song_suggestions(query, limit=5):
     """
-    Returns a list of song names matching the search text.
+    Returns song names matching the search query.
     """
 
     query = query.strip().lower()
 
-    if query == "":
+    if not query:
         return []
 
     matches = df["track_name"][
-        df["track_name"].str.lower().str.contains(query, na=False)
+        track_names.str.contains(query, na=False)
     ]
 
-    suggestions = matches.drop_duplicates().head(limit).tolist()
-
-    return suggestions
+    return matches.drop_duplicates().head(limit).tolist()

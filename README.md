@@ -1,132 +1,222 @@
-# 🎵 Music Recommendation System
+# 🎵 EchoTune
 
-A Flask-based Music Recommendation System that recommends similar songs using **Content-Based Filtering** and **Cosine Similarity**.
+> **Music Recommendation System using Flask and Machine Learning**
 
----
-
-## 🚀 Features
-
-- 🎵 Music Recommendation using Machine Learning
-- 🔍 Partial Song Search
-- ⚡ Live Autocomplete Suggestions
-- 📊 Cosine Similarity Recommendation Engine
-- 🌐 Flask Backend
-- 🎨 Responsive User Interface
-- ❌ Error Handling for Invalid Searches
+EchoTune is a web-based music recommendation system that suggests songs similar to a user's favorite track by analyzing audio features using the **Cosine Similarity** algorithm. The application provides a clean, responsive interface built with **Flask, HTML, CSS, JavaScript, and Machine Learning**.
 
 ---
 
-## 🛠️ Tech Stack
+# 📖 Overview
 
-- Python
-- Flask
-- Pandas
-- Scikit-learn
-- HTML
-- CSS
-- JavaScript
+EchoTune helps users discover new music by comparing the characteristics of songs from a Spotify dataset. When a user searches for a song, the application finds the closest matching track and recommends similar songs based on their audio features.
+
+This project was initially developed during my internship and later improved into a clean, portfolio-ready web application with a modern user interface.
 
 ---
 
-## 📂 Project Structure
+# ✨ Features
 
-```
-MusicRecommendationProject/
-│
-├── app.py
-├── recommendation.py
-├── clean_spotify.csv
-├── requirements.txt
-├── README.md
-├── .gitignore
-│
-├── static/
-│   ├── css/
-│   ├── js/
-│   └── images/
-│
-├── templates/
-│   └── index.html
-│
-└── screenshots/
-```
+* 🎵 Music recommendation using Cosine Similarity
+* 🔍 Song search with autocomplete
+* 📊 Machine Learning-based recommendation engine
+* 🌙 Modern responsive dark-themed UI
+* ⚡ Loading animation
+* ❌ Error handling for unavailable songs
+* 📱 Mobile-friendly design
+* 🧩 Clean and modular project structure
 
 ---
 
-## 📸 Screenshots
+# 🛠️ Tech Stack
 
-### 🏠 Home Page
+### Frontend
+
+* HTML5
+* CSS3
+* JavaScript
+
+### Backend
+
+* Python
+* Flask
+
+### Machine Learning
+
+* Pandas
+* Scikit-learn
+* Cosine Similarity
+
+### Dataset
+
+* Spotify Songs Dataset
+
+---
+
+# 📷 Screenshots
+
+## 🏠 Home Page
 
 ![Home](screenshots/home.png)
 
 ---
 
-### 🔍 Live Autocomplete
+## 🔍 Autocomplete Search
 
 ![Autocomplete](screenshots/autocomplete.png)
 
 ---
 
-### 🎵 Song Recommendations
+## 🎵 Recommendations
 
 ![Recommendations](screenshots/recommendations.png)
 
 ---
 
-### ❌ Invalid Song Search
+## ❌ Error Handling
 
 ![Error](screenshots/error.png)
 
 ---
 
-## ⚙️ Installation
+# ⚙️ How It Works
 
-Clone the repository
+1. User enters a song name.
+2. The application searches the Spotify dataset.
+3. The selected song is identified.
+4. Audio features are compared using Cosine Similarity.
+5. Similar songs are ranked.
+6. Top recommendations are displayed to the user.
 
-```bash
-git clone <repository-url>
+---
+
+# 📂 Project Structure
+
+```text
+EchoTune/
+│
+├── app.py
+├── recommendation.py
+├── requirements.txt
+├── README.md
+├── Procfile
+├── .gitignore
+│
+├── data/
+│   └── clean_spotify.csv
+│
+├── static/
+│   ├── css/
+│   │   ├── base.css
+│   │   ├── layout.css
+│   │   ├── components.css
+│   │   ├── responsive.css
+│   │   └── style.css
+│   │
+│   ├── js/
+│   │   └── script.js
+│   │
+│   └── images/
+│       └── favicon.ico
+│
+├── templates/
+│   └── index.html
+│
+├── screenshots/
+│   ├── home.png
+│   ├── autocomplete.png
+│   ├── recommendations.png
+│   └── error.png
+│
+└── scripts/
+    ├── clean_dataset.py
+    ├── explore_dataset.py
+    ├── test_dataset.py
+    └── test_suggestions.py
 ```
 
-Move into the project
+---
+
+# 🚀 Installation
+
+### 1. Clone the repository
 
 ```bash
-cd MusicRecommendationProject
+git clone https://github.com/YOUR_USERNAME/EchoTune.git
 ```
 
-Install dependencies
+### 2. Navigate to the project directory
+
+```bash
+cd EchoTune
+```
+
+### 3. Create a virtual environment
+
+```bash
+python -m venv venv
+```
+
+### 4. Activate the virtual environment
+
+**Windows**
+
+```bash
+venv\Scripts\activate
+```
+
+**Linux / macOS**
+
+```bash
+source venv/bin/activate
+```
+
+### 5. Install the required packages
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Run the application
+### 6. Run the application
 
 ```bash
 python app.py
 ```
 
-Open in your browser
+### 7. Open your browser
 
-```
+```text
 http://127.0.0.1:5000
 ```
 
 ---
 
-## 📈 Future Enhancements
+# 💡 Future Improvements
 
-- 👤 User Authentication
-- ❤️ Favorite Songs
-- 🎵 Playlist Management
-- 🗄️ MySQL Database
-- ☁️ Deployment
+* Filter recommendations by genre
+* Improve recommendation accuracy with additional audio features
+* Use a larger music dataset
+* Enhance recommendation visualization
 
 ---
 
-## 👩‍💻 Author
+# 👨‍💻 Author
 
 **Sinchana Shetty S**
 
-Electronics & Communication Engineering Graduate
+* GitHub: https://github.com/YOUR_USERNAME
+* LinkedIn: https://linkedin.com/in/YOUR_LINKEDIN
 
-Python Full Stack Developer
+---
+
+# 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+# ⭐ Acknowledgements
+
+* Flask Documentation
+* Scikit-learn Documentation
+* Pandas Documentation
+* Spotify Songs Dataset

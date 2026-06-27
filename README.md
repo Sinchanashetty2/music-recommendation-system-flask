@@ -203,8 +203,8 @@ http://127.0.0.1:5000
 
 **Sinchana Shetty S**
 
-* GitHub: https://github.com/YOUR_USERNAME
-* LinkedIn: https://linkedin.com/in/YOUR_LINKEDIN
+* GitHub: https://github.com/Sinchanashetty2
+* LinkedIn: https://linkedin.com/in/Sinchanashetty2
 
 ---
 
